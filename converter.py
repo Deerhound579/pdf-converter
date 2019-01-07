@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-import re
 import pdfkit
 import os
 from PyPDF2 import PdfFileMerger
