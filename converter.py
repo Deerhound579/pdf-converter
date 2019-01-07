@@ -28,7 +28,7 @@ options = {
     'margin-left': '0.75in',
 }
 
-# Create pdfs
+# Create pdfs. Name them: 01.pdf, 02.pdf...
 for index, l in enumerate(links, 1):
    pdfkit.from_url(l, (str(index).zfill(2))+'.pdf', options=options)
 
@@ -48,5 +48,3 @@ for pdf in pdfs:
 with open('CIS194_Haskell.pdf', 'wb') as fout:
     merger.write(fout)
 
-# for index, l in enumerate(links, 1):
-#    pdfkit.from_url(l, (str(index).zfill(2))+'.pdf', options=options)
