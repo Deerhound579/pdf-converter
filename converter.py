@@ -1,24 +1,8 @@
-from bs4 import BeautifulSoup
-import requests
 import pdfkit
 import os
 from PyPDF2 import PdfFileMerger
+from little_crawler import link_crawler
 
-
-
-def little_crawler(url):
-    '''
-    A function to extract all links to lectures notes on https://www.seas.upenn.edu/~cis194/spring13/
-    '''
-    page = requests.get(url)
-    content = BeautifulSoup(page.text, 'html.parser')
-    # All links are in <a href="...">html</a>
-    raw_links = content.find_all('a', string='html') 
-    links = ['https://www.seas.upenn.edu/~cis194/spring13/' + x['href'] for x in raw_links]
-    return links
-
-
-links = little_crawler('https://www.seas.upenn.edu/~cis194/spring13/lectures.html')
 
 options = {
     'page-size': 'A4',
@@ -28,11 +12,14 @@ options = {
     'margin-left': '0.75in',
 }
 
+
+links = link_crawler('https://www.seas.upenn.edu/~cis194/spring13/lectures.html')
+
 # Create pdfs
 for index, l in enumerate(links, 1):
    pdfkit.from_url(l, (str(index).zfill(2))+'.pdf', options=options)
 
-# Merge pdfs
+Merge pdfs
 files_dir = os.getcwd()
 
 pdfs = list()
@@ -50,3 +37,14 @@ with open('CIS194_Haskell.pdf', 'wb') as fout:
 
 # for index, l in enumerate(links, 1):
 #    pdfkit.from_url(l, (str(index).zfill(2))+'.pdf', options=options)
+
+# Failed. Only blank pages are generated.
+# links = link_crawler(
+#     'https://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/',
+#     'https://www.cs.cornell.edu/courses/cs3110/2019sp/textbook/')
+
+
+# for x in links[-6:]:
+#     links.remove(x)
+
+# del links[-1]
