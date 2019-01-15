@@ -12,7 +12,6 @@ options = {
     'margin-left': '0.75in',
 }
 
-
 links = link_crawler('https://www.seas.upenn.edu/~cis194/spring13/lectures.html')
 
 # Create pdfs
